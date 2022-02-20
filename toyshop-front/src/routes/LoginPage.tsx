@@ -1,5 +1,5 @@
-import LoginForm from "../ui/login-form";
-import SignupForm from "../ui/signup-form";
+import LoginForm from "../components/ui/login-form";
+import SignupForm from "../components/ui/signup-form";
 
 const LoginPage = () => (
   <main className="main-content">

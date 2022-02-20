@@ -5,6 +5,7 @@ import "./routes/login.css";
 import AppRouter from "./router";
 import { AuthProvider } from "./providers/auth-provider";
 import { Toaster } from "react-hot-toast";
+import { Routes } from "react-router-dom";
 
 function App() {
   return (

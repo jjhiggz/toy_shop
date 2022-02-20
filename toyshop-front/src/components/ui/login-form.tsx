@@ -1,33 +1,24 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { AuthRequests } from "../api-calls/auth.requests";
-import { useAuth } from "../providers/auth-provider";
+import { AuthRequests } from "../../api-calls/auth.requests";
+import { useAuth } from "../../providers/auth-provider";
 
-interface SignupFormInputs {
+interface LoginFormInputs {
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
-const SignupForm = () => {
+const LoginForm = () => {
   const { setUser } = useAuth();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<SignupFormInputs>();
+  } = useForm<LoginFormInputs>();
 
-  const onSubmit: SubmitHandler<SignupFormInputs> = (data) => {
-    return Promise.resolve()
-      .then(() => {
-        if (data.confirmPassword !== data.password) {
-          throw new Error("Passwords do not match");
-        }
-      })
-      .then(() =>
-        AuthRequests.signup({ email: data.email, password: data.password })
-      )
+  const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
+    return AuthRequests.login({ email: data.email, password: data.password })
       .then((user) => {
         setUser(user);
       })
@@ -41,7 +32,7 @@ const SignupForm = () => {
 
   return (
     <>
-      <h1>Signup</h1>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="email">Email</label>
@@ -55,14 +46,6 @@ const SignupForm = () => {
             placeholder="password"
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            {...register("confirmPassword")}
-            type="password"
-            placeholder="same as above"
-          />
-        </div>
         <div className="submit-wrapper">
           <input type="submit" value="submit" />
         </div>
@@ -71,4 +54,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default LoginForm;

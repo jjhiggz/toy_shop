@@ -42,7 +42,9 @@ class AuthenticationController < ApplicationController
     end
 
     render json: {
-      token: get_token(user)
+      token: get_token(user),
+      email: user.email,
+      role: user.role
     }, status: :ok
   end
 

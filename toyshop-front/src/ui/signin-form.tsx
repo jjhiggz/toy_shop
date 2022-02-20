@@ -9,7 +9,7 @@ interface SigninFormInputs {
 }
 
 const SigninForm = () => {
-  const { setToken } = useAuth();
+  const { setUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -19,8 +19,8 @@ const SigninForm = () => {
 
   const onSubmit: SubmitHandler<SigninFormInputs> = (data) => {
     return AuthRequests.login({ email: data.email, password: data.password })
-      .then((data) => {
-        setToken(data.token);
+      .then((user) => {
+        setUser(user);
       })
       .catch((err) => {
         toast.error(err.message);

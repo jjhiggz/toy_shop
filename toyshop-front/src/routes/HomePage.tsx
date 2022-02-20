@@ -1,13 +1,13 @@
 import { useAuth } from "../providers/auth-provider";
 
 const HomePage = () => {
-  const { setToken } = useAuth();
+  const { setUser, user } = useAuth();
   return (
     <div>
-      <h1>Home</h1>
+      <h1>Welcome to the Toy Shop {user?.email}</h1>
       <button
         onClick={() => {
-          setToken(undefined);
+          setUser(undefined);
         }}
       >
         logout

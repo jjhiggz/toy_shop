@@ -7,18 +7,21 @@ import {
   useState,
 } from "react";
 import useLocalStorage from "../hooks/use-local-storage";
+import { TUser } from "../types/user.type";
 
 export type AuthState = "loggedIn" | "loggedOut" | "loading";
 
 export interface AuthProviderProps {
   state: AuthState;
   email?: string;
-  setToken: Dispatch<SetStateAction<string | undefined>>;
+  setUser: Dispatch<SetStateAction<TUser | undefined>>;
+  user: TUser | undefined;
 }
 
 const defaultAuthState: AuthProviderProps = {
   state: "loggedOut",
-  setToken: () => {},
+  setUser: () => {},
+  user: undefined,
 };
 
 const AuthContext = createContext<AuthProviderProps>(defaultAuthState);
@@ -28,30 +31,31 @@ export const AuthProvider = ({
 }: {
   children: JSX.Element | JSX.Element[];
 }) => {
-  const [token, setToken] = useLocalStorage("token");
+  const [user, setUser] = useLocalStorage("user");
 
   const [authState, setAuthState] = useState<AuthState>(
-    token ? "loading" : "loggedOut"
+    user ? "loading" : "loggedOut"
   );
 
   const [email, setEmail] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (!token) {
+    if (!user) {
       setAuthState("loggedOut");
       return;
     }
-    if (token) {
+    if (user) {
       setAuthState("loggedIn");
     }
-  }, [token]);
+  }, [user]);
 
   return (
     <AuthContext.Provider
       value={{
+        user: user as any as TUser,
         state: authState,
         email,
-        setToken: setToken as Dispatch<SetStateAction<string | undefined>>,
+        setUser: setUser as Dispatch<SetStateAction<TUser | undefined>>,
       }}
     >
       {children}

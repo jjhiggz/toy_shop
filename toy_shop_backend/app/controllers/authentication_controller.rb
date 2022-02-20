@@ -12,7 +12,8 @@ class AuthenticationController < ApplicationController
     render(json: {
              user: {
                email: potential_user.email,
-               token: get_token(potential_user)
+               token: get_token(potential_user),
+               role: potential_user.role
              }
            }, status: :ok)
   end

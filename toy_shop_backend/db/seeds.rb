@@ -14,7 +14,7 @@ user_1 = User.create({
                      })
 
 admin = User.create({
-                      email: 'user@user.com',
+                      email: 'admin@admin.com',
                       password: 'password',
                       role: 'admin'
                     })

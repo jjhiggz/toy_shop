@@ -1,9 +1,10 @@
-import SigninForm from "../ui/signin-form";
+import LoginForm from "../ui/login-form";
+import SignupForm from "../ui/signup-form";
 
 const LoginPage = () => (
   <main className="main-content">
-    <h1>Login</h1>
-    <SigninForm />
+    <LoginForm />
+    <SignupForm />
   </main>
 );
 

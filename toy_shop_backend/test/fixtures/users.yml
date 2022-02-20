@@ -1,4 +1,8 @@
 reg_user_1:
   password_digest: <%= BCrypt::Password.create('testpassword') %>
   email: user_1@gmail.com
+admin:
+  password_digest: <%= BCrypt::Password.create('testpassword') %>
+  email: admin@admin.com
+  role: "admin"
 

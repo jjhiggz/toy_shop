@@ -34,7 +34,7 @@ class UserTest < ActiveSupport::TestCase
   test 'You can create a user with a valid role' do
     user = User.create({
                          password: 'coolbeans',
-                         email: 'admin@admin.com',
+                         email: 'admin2@admin.com',
                          role: 'admin'
                        })
     assert(user.valid?)

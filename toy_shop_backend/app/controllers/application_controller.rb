@@ -4,13 +4,16 @@ class ApplicationController < ActionController::API
   end
 
   def authorize_admin
+    authorize_request
     unless @current_user.role == 'admin'
       render json: {
         error: {
           message: 'Not Authorized'
         }
       }, status: :unauthorized
+      return
     end
+    @current_user
   end
 
   def authorize_request
@@ -26,6 +29,7 @@ class ApplicationController < ActionController::API
           message: 'Not Authorized'
         }
       }, status: :unauthorized
+      nil
     end
   end
 end

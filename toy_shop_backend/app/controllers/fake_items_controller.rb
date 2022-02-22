@@ -4,6 +4,9 @@ class FakeItemsController < ApplicationController
   before_action :authorize_request
 
   def index
+    if authorize_admin
+
+    end
     render json: { items: [1, 2, 3] }, status: 200
   end
 
